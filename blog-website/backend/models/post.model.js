@@ -8,7 +8,8 @@ const postSchema = new Schema({
     body: { type: String, required: true },
     author: { type: User, required: true },
     likes: { type: Number, required: true },
-    comments: { type: Array, required: true } // array of comments
+    comments: { type: Array, required: true }, // array of comments
+    date: { type: Date, required: true }
 }, {versionKey: false});
 
 const Post = mongoose.model('Post', postSchema)

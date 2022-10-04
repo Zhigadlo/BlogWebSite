@@ -6,7 +6,8 @@ const Schema = mongoose.Schema;
 const commentSchema = new Schema({
     text: { type: String, required: true},
     likes: { type: Number, required: true },
-    author: { type: User, required: true }
+    author: { type: User, required: true },
+    date: { type: Date, required: true }
 }, {versionKey: false})
 
 const Comment = mongoose.model('Comment', commentSchema)
