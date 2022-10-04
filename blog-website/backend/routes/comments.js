@@ -8,21 +8,47 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
     const text = req.body.text;
-    const likes = req.body.likes;
+    const likes = Number.parse(req.body.likes);
     const author = req.body.author;
-    const date = req.body.date;
+    const date = Date.parse(req.body.date);
     
-    const newPost = new Post({
-            title,
+    const newComment = new Comment({
+            text,
             likes,
             author,
             date
     });
 
-    newPost.save()
+    newComment.save()
         .then(() => res.json('Comment added!'))
         .catch(err => res.status(400).json('Error: ' + err));
-
 });
+
+router.route('/:id').get((req, res) => {
+    Comment.findById()
+        .then(comment => res.json(comment))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
+router.route('/:id').delete((req, res) => {
+    Comment.findByIdAndDelete(req.params.id)
+        .then(() => res.json('Comment deleted.'))
+        .catch(err => res.status(400).json('Error ' + err));
+})
+
+router.route('/update/:id').post((req, res) => {
+    Comment.findById(req.params.id)
+        .then(comment => {
+            comment.text = req.body.text;
+            comment.author = req.body.author;
+            comment.date = Date.parse(req.body.date);
+            comment.likes = Number.parse(req.body.likes);
+
+            comment.save()
+                .then(res => res.json('Comment updated.'))
+                .catch(err => res.status(400).json('Error ' + err))
+        })
+        .catch(err => res.status(400).json('Error ' + err));
+})
 
 module.exports = router;

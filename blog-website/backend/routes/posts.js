@@ -29,4 +29,33 @@ router.route('/add').post((req, res) => {
 
 });
 
+router.route('/:id').get((req, res) => {
+    Post.findById(req.params.id)
+        .then(post => res.json(post))
+        .catch(err => res.status(400).json('Error ' + err));
+})
+
+router.route('/:id').delete((req, res) => {
+    Post.findByIdAndDelete(req.params.id)
+        .then(() => res.json('Post deleted.'))
+        .catch(err => res.status(400).json('Error ' + err));
+});
+
+router.route('/update/:id').post((req, res) => {
+    Post.findById(req.params.id)
+        .then(post => {
+            post.title = req.body.title;
+            post.body = req.body.body;
+            post.author = req.body.author;
+            post.date = req.body.date;
+            post.comments = req.body.comments;
+            post.likes = req.body.likes;
+
+            post.save()
+                .then(() => res.json('Post updated.'))
+                .catch(err => res.status(400).json('Error ' + err));
+        })
+        .catch(err => res.status(400).json('Error ' + err));
+})
+
 module.exports = router;
