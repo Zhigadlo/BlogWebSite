@@ -11,11 +11,13 @@ router.route('/add').post((req, res) => {
     const name = req.body.nickname;
     const lastName = req.body.lastName;
     const nickname = req.body.nickname;
+    const password = req.body.password;
 
     const newUser = new User({
             name,
             lastName,
-            nickname
+            nickname,
+            password
     });
 
     newUser.save()
@@ -41,6 +43,7 @@ router.route('/update/:id').post((req, res) => {
             user.name = req.body.name;
             user.lastName = req.body.lastName;
             user.nickname = req.body.nickname;
+            user.password = req.body.password;
 
             user.save()
                 .then(() => res.json('User updated!'))

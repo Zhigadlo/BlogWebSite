@@ -9,15 +9,15 @@ router.route('/').get((req, res) => {
 router.route('/add').post((req, res) => {
     const title = req.body.title;
     const body = req.body.body;
-    const author = req.body.author;
-    const likes = req.body.likes;
+    const authorId = parseInt(req.body.author);
+    const likes = parseInt(req.body.likes);
     const comments = req.body.comments;
-    const date = req.body.date;
+    const date = Date.parse(req.body.date);
 
     const newPost = new Post({
             title,
             body,
-            author,
+            authorId,
             likes,
             comments,
             date
@@ -46,10 +46,10 @@ router.route('/update/:id').post((req, res) => {
         .then(post => {
             post.title = req.body.title;
             post.body = req.body.body;
-            post.author = req.body.author;
-            post.date = req.body.date;
+            post.authorId = req.body.author;
+            post.date = Date.parse(req.body.date);
             post.comments = req.body.comments;
-            post.likes = req.body.likes;
+            post.likes = parseInt(req.body.likes);
 
             post.save()
                 .then(() => res.json('Post updated.'))

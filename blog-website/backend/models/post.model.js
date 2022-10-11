@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const postSchema = new Schema({
     title: { type: String, required: true },
     body: { type: String, required: true },
-    author: { type: String, required: true },
+    authorId: { type: String, required: true },
     likes: { type: Number, required: true },
     comments: { type: Array, required: true }, // array of comments
     date: { type: Date, required: true }

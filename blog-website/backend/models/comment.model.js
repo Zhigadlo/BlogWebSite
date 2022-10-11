@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const commentSchema = new Schema({
     text: { type: String, required: true},
     likes: { type: Number, required: true },
-    author: { type: String, required: true },
+    authorId: { type: String, required: true },
     date: { type: Date, required: true }
 }, {versionKey: false})
 

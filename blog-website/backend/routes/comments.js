@@ -8,14 +8,14 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
     const text = req.body.text;
-    const likes = Number.parse(req.body.likes);
-    const author = req.body.author;
+    const likes = parseInt(req.body.likes);
+    const authorId = req.body.authorId;
     const date = Date.parse(req.body.date);
     
     const newComment = new Comment({
             text,
             likes,
-            author,
+            authorId,
             date
     });
 
@@ -25,7 +25,7 @@ router.route('/add').post((req, res) => {
 });
 
 router.route('/:id').get((req, res) => {
-    Comment.findById()
+    Comment.findById(req.params.id)
         .then(comment => res.json(comment))
         .catch(err => res.status(400).json('Error: ' + err));
 })
@@ -40,12 +40,12 @@ router.route('/update/:id').post((req, res) => {
     Comment.findById(req.params.id)
         .then(comment => {
             comment.text = req.body.text;
-            comment.author = req.body.author;
+            comment.authorId = req.body.author;
             comment.date = Date.parse(req.body.date);
-            comment.likes = Number.parse(req.body.likes);
+            comment.likes = parseInt(req.body.likes);
 
             comment.save()
-                .then(res => res.json('Comment updated.'))
+                .then(() => res.json('Comment updated.'))
                 .catch(err => res.status(400).json('Error ' + err))
         })
         .catch(err => res.status(400).json('Error ' + err));

@@ -11,11 +11,12 @@ app.use(cors());
 app.use(express.json());
 const uri = "mongodb+srv://Zhigadlo:3VQhXcNw1HPh2mJi@amazoncloud.mismmy6.mongodb.net/blogsdb?retryWrites=true&w=majority";
 //const uri = process.env.ATLAS_URI;
-//console.log(uri)
+
+console.log(uri)
 mongoose.connect(uri);
 const connection = mongoose.connection;
 connection.once('open', () => {
-    console.log("MongoDb database connection established succesfully")
+    console.log("MongoDb database connection established succesfully");
 });
 
 const usersRouter = require('./routes/users');
