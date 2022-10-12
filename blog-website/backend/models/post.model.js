@@ -7,7 +7,7 @@ const postSchema = new Schema({
     body: { type: String, required: true },
     authorId: { type: String, required: true },
     likes: { type: Number, required: true },
-    comments: { type: Array, required: true }, // array of comments
+    commentIds: { type: Array, required: true }, // array of comments
     date: { type: Date, required: true }
 }, {versionKey: false});
 

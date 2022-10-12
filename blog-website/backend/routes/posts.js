@@ -11,7 +11,7 @@ router.route('/add').post((req, res) => {
     const body = req.body.body;
     const authorId = parseInt(req.body.author);
     const likes = parseInt(req.body.likes);
-    const comments = req.body.comments;
+    const commentIds = req.body.commentIds;
     const date = Date.parse(req.body.date);
 
     const newPost = new Post({
@@ -19,7 +19,7 @@ router.route('/add').post((req, res) => {
             body,
             authorId,
             likes,
-            comments,
+            commentIds,
             date
     });
 
@@ -48,7 +48,7 @@ router.route('/update/:id').post((req, res) => {
             post.body = req.body.body;
             post.authorId = req.body.author;
             post.date = Date.parse(req.body.date);
-            post.comments = req.body.comments;
+            post.commentIds = req.body.commentIds;
             post.likes = parseInt(req.body.likes);
 
             post.save()
