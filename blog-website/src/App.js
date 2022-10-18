@@ -7,6 +7,7 @@ import BlogPage from './components/blog.component';
 import CreateBlogPage from './components/create-blog.component';
 import CreateUserPage from './components/create-user.component';
 import UpdateUserPage from './components/update-user-information.component';
+import PostInfo from './components/post-info';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/blog/create" exact element={<CreateBlogPage/>}/>
           <Route path="/users/create" exact element={<CreateUserPage/>}/>
           <Route path="/users/update" exact element={<UpdateUserPage/>}/>
+          <Route path="/posts/:id" exact element={<PostInfo/>}/>
         </Routes>
       </div>
     </Router>
