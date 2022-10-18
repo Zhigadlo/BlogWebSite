@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-
-
-export default class CreateUserPage extends Component {
+export default class UpdateUserPage extends Component {
     constructor(props){
         super(props);
 
@@ -64,22 +62,22 @@ export default class CreateUserPage extends Component {
             password: this.state.password
         }
         
-        if(this.state.users.findIndex(u => u.nickname === user.nickname) !== -1){
-            console.log("There is such user")
+        let i = this.state.users.findIndex(u => u.nickname === user.nickname)
+        if(i !== -1){
+            axios.post('http://localhost:5000/users/update/' + this.state.users[i]._id, user)
+                .then(res => console.log(res.data));
+            window.location = '/';
         }
         else
         {
-            axios.post('http://localhost:5000/users/add', user)
-                .then(res => console.log(res.data));
-            window.location = '/';
-
+            console.log("There is no such user")
         }
     }
     
     render() {
         return (
             <div>
-                <h1>Registration</h1>
+                <h1>Update information</h1>
                 <form onSubmit={this.onSubmit}>
                     <label>Nickname: </label>
                     <input type="text"
@@ -101,13 +99,11 @@ export default class CreateUserPage extends Component {
                     </input><br/>
                     <label>Password: </label>
                     <input type="text"
-                            minlength="8"
-                            maxlength="20"
                             required
                             value={this.state.password}
                             onChange={this.onChangePassword}>
                     </input><br/>
-                    <input type="submit" value="Create"/>
+                    <input type="submit" value="Update"/>
                 </form>
             </div>
         )

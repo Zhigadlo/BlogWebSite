@@ -5,7 +5,6 @@ export default class Navbar extends Component {
     render(){
         return (
             <nav>
-                
                 <ul>
                     <li>
                         <Link to="/">MainPage</Link>
@@ -17,7 +16,10 @@ export default class Navbar extends Component {
                         <Link to="/blog/create">CreateBlogPage</Link>
                     </li>
                     <li>
-                        <Link to="/users/create">CreateUserPage</Link>
+                        <Link to="/users/create">RegistrationPage</Link>
+                    </li>
+                    <li>
+                        <Link to="/users/update">UpdateUserInformationPage</Link>
                     </li>
                 </ul>
             </nav>

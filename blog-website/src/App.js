@@ -6,6 +6,7 @@ import MainPage from './components/popular-blogs.component';
 import BlogPage from './components/blog.component';
 import CreateBlogPage from './components/create-blog.component';
 import CreateUserPage from './components/create-user.component';
+import UpdateUserPage from './components/update-user-information.component';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/blog" exact element={<BlogPage/>}/>
           <Route path="/blog/create" exact element={<CreateBlogPage/>}/>
           <Route path="/users/create" exact element={<CreateUserPage/>}/>
+          <Route path="/users/update" exact element={<UpdateUserPage/>}/>
         </Routes>
       </div>
     </Router>
