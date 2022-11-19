@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+
 export default class MainPage extends Component {
     constructor(props){
         super(props);
@@ -32,13 +33,12 @@ export default class MainPage extends Component {
                     let i = this.state.users.findIndex(u => u._id === value.authorId);
                     let author;
                     if(i === -1){
-                        author = "deleted user";
+                        author = "anonymus";
                     }
                     else{
                         author = this.state.users[i].nickname;
                     }
                     
-                    console.log(i)
                     return <PostHeader model = {value} author={author}/>
                 })}
             </div>

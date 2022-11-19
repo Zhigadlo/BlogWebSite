@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-export default class CreateUserPage extends Component {
+export default class LoginPage extends Component{
     constructor(props){
         super(props);
 
-        this.onChangeName = this.onChangeName.bind(this);
-        this.onChangelastName = this.onChangelastName.bind(this);
         this.onChangeNickname = this.onChangeNickname.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             nickname: '',
-            name: '',
-            lastname: '',
             password: '',
             users: []
         }
@@ -27,22 +23,10 @@ export default class CreateUserPage extends Component {
             })
         })
     }
-
+    
     onChangeNickname(e){
         this.setState({
             nickname: e.target.value
-        })
-    }
-
-    onChangeName(e){
-        this.setState({
-            name: e.target.value
-        })
-    }
-
-    onChangelastName(e){
-        this.setState({
-            lastname: e.target.value
         })
     }
 
@@ -56,28 +40,27 @@ export default class CreateUserPage extends Component {
         e.preventDefault();
 
         const user = {
-            name: this.state.name,
-            lastName: this.state.lastname,
             nickname: this.state.nickname,
             password: this.state.password
         }
         
-        if(this.state.users.findIndex(u => u.nickname === user.nickname) !== -1){
-            console.log("There is such user")
+        let i = this.state.users.findIndex(u => u.nickname === user.nickname && u.password === user.password)
+        if(i !== -1){
+            window.location = '/'
+            var cookie = "authorisedUser=" + this.state.users[i]._id
+            document.cookie = cookie
         }
         else
         {
-            axios.post('http://localhost:5000/users/add', user)
-                .then(res => console.log(res.data));
-            window.location = '/';
-
+            console.log("There is no such user")
         }
+
     }
-    
+
     render() {
         return (
             <div>
-                <h1>Registration</h1>
+                <h1>Login</h1>
                 <form onSubmit={this.onSubmit}>
                     <label>Nickname: </label>
                     <input type="text"
@@ -85,29 +68,16 @@ export default class CreateUserPage extends Component {
                             value={this.state.nickname}
                             onChange={this.onChangeNickname}>
                     </input><br/>
-                    <label>Name: </label>
-                    <input type="text"
-                            required
-                            value={this.state.name}
-                            onChange={this.onChangeName}>
-                    </input><br/>
-                    <label>Last name: </label>
-                    <input type="text"
-                            required
-                            value={this.state.lastname}
-                            onChange={this.onChangelastName}>
-                    </input><br/>
                     <label>Password: </label>
                     <input type="text"
-                            minlength="8"
-                            maxlength="20"
                             required
                             value={this.state.password}
                             onChange={this.onChangePassword}>
                     </input><br/>
-                    <input type="submit" value="Create"/>
+                    <input type="submit" value="Login"/>
                 </form>
             </div>
         )
     }
+
 }
