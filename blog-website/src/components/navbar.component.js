@@ -40,9 +40,7 @@ export default class Navbar extends Component {
                     <li>
                         <Link to="/blog">BlogPage</Link>
                     </li>
-                    <li>
-                        <Link to="/blog/create">CreateBlogPage</Link>
-                    </li>
+                    <PostLabel nickname = {this.state.nickname}/>
                     <li>
                         <Link to="/users/create">RegistrationPage</Link>
                     </li>
@@ -54,6 +52,14 @@ export default class Navbar extends Component {
                 </ul>
             </nav>
         )
+    }
+}
+
+function PostLabel(params){
+    if(params.nickname !== "anonymus"){
+        return  <li>
+                    <Link to="/blog/create">CreateBlogPage</Link>
+                </li>
     }
 }
 

@@ -7,7 +7,7 @@ import BlogPage from './components/blog.component';
 import CreateBlogPage from './components/create-blog.component';
 import CreateUserPage from './components/create-user.component';
 import UpdateUserPage from './components/update-user-information.component';
-import PostInfo from './components/post-info-component';
+import PostInfo from './components/post-info.component';
 import LoginPage from './components/login.component';
 
 function App() {
