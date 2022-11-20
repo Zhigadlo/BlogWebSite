@@ -8,15 +8,17 @@ export default class Navbar extends Component {
         super(props);
 
         this.state = {
-            nickname: ''
+            nickname: "",
+            _id: ""
         }
     }
 
     componentDidMount(){
-        let id = document.cookie.split('=')[1]
+        let cookies = document.cookie.split('=')
+        let id = cookies[cookies.length-1]
         console.log(id)
-        if(id === 'anonymus'){
-            this.setState({ nickname: 'anonymus' }) 
+        if(id === "0"){
+            this.setState({ nickname: "anonymus", _id: "0" }) 
         }
         else{
             axios.get('http://localhost:5000/users/' + id).then(res => {
@@ -56,19 +58,18 @@ export default class Navbar extends Component {
 }
 
 function LoginLabel(params){
-    if(params.nickname === 'anonymus'){
-        return <li>
-                    <Link to="/Login">Login</Link>
-                </li>
-    }
-    else{
+    if(params.nickname !== "anonymus"){
         return <div><button onClick={Logout}>Logout</button>
                 <h1>Hallo {params.nickname}</h1></div>
-        
+    }
+    else{
+        return  <li>
+                    <Link to="/login">Login</Link>
+                </li>
     }
 }
 
 function Logout(){
-    document.cookie = "authorisedUser=anonymus"
+    document.cookie = "authorisedUser=0"
     window.location = '/login'
 }

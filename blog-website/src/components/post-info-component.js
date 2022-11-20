@@ -5,6 +5,8 @@ export default class PostInfo extends Component {
     constructor(props){
         super(props);
 
+        this.onChangeComment = this.onChangeComment.bind(this);
+
         this.state = {
             title: String,
             body: String,
@@ -15,6 +17,7 @@ export default class PostInfo extends Component {
             //post: Object,
             users: [],
             comments: [],
+            newComment: ''
         }
     }
 
@@ -31,7 +34,7 @@ export default class PostInfo extends Component {
                 authorId: res.data.authorId
             })
         });
-
+        
         // get users
         axios.get('http://localhost:5000/users/').then(res => {
             this.setState({
@@ -44,6 +47,35 @@ export default class PostInfo extends Component {
                 comments: res.data
             })
         ))
+    }
+
+    onChangeComment(e){
+        this.setState({
+            newComment: e.target.value
+        })
+    }
+
+    onSubmit(){
+        let cookies = document.cookie.split("=")
+        if(cookies[cookies.length-1] === "0"){
+            console.log("poshol nahui")
+            window.location = '/login'
+        }
+        else{
+            console.log(this.state.users)
+            let authorIndex = this.state.users.findIndex(c => c._id === cookies[cookies.length-1])
+
+            const comment = {
+                text: this.state.newComment,
+                likes: 0,
+                authorId: this.state.users[authorIndex]._id,
+                date: Date.now()
+            }
+            console.log(comment)
+            
+            axios.post('http://localhost:5000/comments/add', comment)
+                .then(res => console.log(res.data));
+        }
     }
 
     render() {
@@ -63,7 +95,6 @@ export default class PostInfo extends Component {
 
                     i = this.state.users.findIndex(u => u._id === comment.authorId);
                     let author;
-                    console.log(author)
                     if(i === -1){
                         author = "anonymus";
                     }
@@ -72,9 +103,20 @@ export default class PostInfo extends Component {
                     }
                     return <CommentInfo model = {comment} author={author}/>
                 })}
+                <form onSubmit={this.onSubmit}>
+                    <label>You can leave a comment here</label><br/>
+                    <input type="text" 
+                           required
+                           value={this.state.newComment}
+                           onChange={this.onChangeComment}/>
+                           <br/>
+                    <button>Leave comment</button>
+                </form>
             </div>
         )
     }
+
+    
 }
 
 function CommentInfo(params)
