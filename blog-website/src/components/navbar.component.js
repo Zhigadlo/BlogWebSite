@@ -31,53 +31,44 @@ export default class Navbar extends Component {
     
     render(){
         return (
-            
             <nav>
-                <ul>
-                    <li>
-                        <Link to="/">MainPage</Link>
-                    </li>
-                    <li>
-                        <Link to="/blog">BlogPage</Link>
-                    </li>
-                    <PostLabel nickname = {this.state.nickname}/>
-                    <RegistriongLabel nickname = {this.state.nickname}/>
-                    <li>
-                        <Link to="/users/update">UpdateUserInformationPage</Link>
-                    </li>
-                    <LoginLabel nickname = {this.state.nickname} />
-                    
-                </ul>
+                <NavLabels nickname = {this.state.nickname}/>
             </nav>
         )
     }
 }
 
-function RegistriongLabel(params){
-    if(params.nickname !== "anonymus"){
-        return  <li>
-                    <Link to="/users/create">RegistrationPage</Link>
-                </li>
-    }
-}
-
-function PostLabel(params){
-    if(params.nickname !== "anonymus"){
-        return  <li>
-                    <Link to="/blog/create">CreateBlogPage</Link>
-                </li>
-    }
-}
-
-function LoginLabel(params){
-    if(params.nickname !== "anonymus"){
-        return <div><button onClick={Logout}>Logout</button>
-                <h1>Hallo {params.nickname}</h1></div>
+function NavLabels(params){
+    if(params.nickname == "anonymus"){
+        return  <ul>
+                    <li>
+                        <Link to="/">MainPage</Link>
+                    </li>
+                    <li>
+                        <Link to="/users/create">RegistrationPage</Link>
+                    </li>
+                    <li>
+                        <Link to="/login">Login</Link>
+                    </li>
+                </ul>
     }
     else{
-        return  <li>
-                    <Link to="/login">Login</Link>
-                </li>
+        return  <ul>
+                    <li>
+                        <Link to="/">MainPage</Link>
+                    </li>
+                    <li>
+                        <Link to="/userposts">Your posts</Link>
+                    </li>
+                    <li>
+                        <Link to="/blog/create">CreateBlogPage</Link>
+                    </li>
+                    <li>
+                        <Link to="/users/update">UpdateUserInformationPage</Link>
+                    </li>
+                    <h1>Hallo {params.nickname}</h1>
+                    <button onClick={Logout}>Logout</button>
+                </ul>
     }
 }
 
