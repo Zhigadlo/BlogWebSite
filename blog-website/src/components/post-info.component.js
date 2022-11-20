@@ -99,9 +99,6 @@ export default class PostInfo extends Component {
                 date: this.state.date
             }
 
-            console.log(post.commentIds)
-            //console.log(post)
-            //console.log(this.state.postId)
             axios.post('http://localhost:5000/posts/update/' + this.state.postId, post)
                  .then(res => console.log(res.data));
         }
