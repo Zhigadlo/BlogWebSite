@@ -53,7 +53,7 @@ export default class UserPostsPage extends Component {
 function PostHeader(params)
 {
     return  <div>
-                <a href={"/posts/" + params.model._id}><h1>{params.model.title}</h1></a>
+                <a href={"/userposts/" + params.model._id}><h1>{params.model.title}</h1></a>
                 <h2>{params.author}</h2>
                 <h3>Likes: {params.model.likes}</h3>
             </div>

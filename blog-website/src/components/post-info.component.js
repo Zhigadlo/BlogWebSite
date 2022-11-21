@@ -6,6 +6,7 @@ export default class PostInfo extends Component {
         super(props);
 
         this.onChangeComment = this.onChangeComment.bind(this);
+        this.onLikeChange = this.onLikeChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -61,6 +62,29 @@ export default class PostInfo extends Component {
         })
     }
 
+    onLikeChange(){
+        var like = document.getElementById("like");
+        if ( like.checked )
+            this.state.likes += 1;
+        else
+            this.state.likes -= 1;
+        this.setState({
+            likes: this.state.likes
+        })
+        const post = {
+            title: this.state.title,
+            body: this.state.body,
+            authorId: this.state.authorId,
+            likes: this.state.likes,
+            commentIds: this.state.commentIds,
+            date: this.state.date
+        }
+
+        axios.post('http://localhost:5000/posts/update/' + this.state.postId, post)
+             .then(res => console.log(res.data));
+        console.log(this.state.likes)
+    }
+
     onSubmit(e){
         e.preventDefault();
         let cookies = document.cookie.split("=")
@@ -90,6 +114,8 @@ export default class PostInfo extends Component {
                         comments: this.state.comments
                     })
                 });
+            
+            
             const post = {
                 title: this.state.title,
                 body: this.state.body,
@@ -103,13 +129,14 @@ export default class PostInfo extends Component {
                  .then(res => console.log(res.data));
         }
     }
-
+    
     render() {
         return (
             <div>
                 <h2>{this.state.title}</h2>
                 <h3>{this.state.body}</h3>
                 <h4>Likes: {this.state.likes} Date: {this.state.date}</h4>
+                <input type="checkbox" id="like" onChange={this.onLikeChange}/>
                 <h4>Comments({this.state.commentIds.length}):</h4>
                 {this.state.commentIds.map((value) => {
                     let i = this.state.comments.findIndex(c => c._id === value)
@@ -126,9 +153,9 @@ export default class PostInfo extends Component {
                         else{
                             author = this.state.users[i].nickname;
                         }
-                        return <CommentInfo model = {comment} author={author}/>
+                        
+                        return <CommentInfo model={comment} author={author}/>
                     }
-                    
                 })}
                 <form onSubmit={this.onSubmit}>
                     <label>You can leave a comment here</label><br/>
@@ -152,6 +179,7 @@ function CommentInfo(params){
                 <h3>{params.model.text}</h3>
                 <h4>{params.author}</h4>
                 <h4>Likes: {params.model.likes} Date: {params.model.date}</h4>
+                
             </div>
     }
 }

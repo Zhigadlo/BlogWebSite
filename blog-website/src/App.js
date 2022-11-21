@@ -9,6 +9,7 @@ import CreateUserPage from './components/create-user.component';
 import UpdateUserPage from './components/update-user-information.component';
 import PostInfo from './components/post-info.component';
 import LoginPage from './components/login.component';
+import PostInfoUpdate from './components/update-post-info.component';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" exact element={<MainPage/>} />
+          <Route path="/userposts/:id" exact element={<PostInfoUpdate/>}/>
           <Route path="/userposts" exact element={<UserPostsPage/>}/>
           <Route path="/blog/create" exact element={<CreatePostPage/>}/>
           <Route path="/users/create" exact element={<CreateUserPage/>}/>
