@@ -31,7 +31,7 @@ export default class Navbar extends Component {
     
     render(){
         return (
-            <nav>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <NavLabels nickname = {this.state.nickname}/>
             </nav>
         )
@@ -40,35 +40,45 @@ export default class Navbar extends Component {
 
 function NavLabels(params){
     if(params.nickname == "anonymus"){
-        return  <ul>
-                    <li>
-                        <Link to="/">MainPage</Link>
+        return  <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <Link class="nav-link text-dark" to="/">MainPage</Link>
                     </li>
-                    <li>
-                        <Link to="/users/create">RegistrationPage</Link>
+                    <li class="nav-item">
+                        <Link class="nav-link text-dark" to="/users/create">RegistrationPage</Link>
                     </li>
-                    <li>
-                        <Link to="/login">Login</Link>
+                    <li class="nav-item">
+                        <Link class="nav-link text-dark" to="/login">Login</Link>
                     </li>
-                </ul>
+                </ul></div>
     }
     else{
-        return  <ul>
-                    <li>
-                        <Link to="/">MainPage</Link>
+        return  <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="navbar-brand">
+                        <Link class="nav-link text-dark" to="/">MainPage</Link>
                     </li>
-                    <li>
-                        <Link to="/userposts">Your posts</Link>
+                    <li class="nav-item">
+                        <Link class="nav-link text-dark" to="/userposts">Your posts</Link>
                     </li>
-                    <li>
-                        <Link to="/blog/create">CreateBlogPage</Link>
+                    <li class="nav-item">
+                        <Link class="nav-link text-dark" to="/blog/create">CreateBlogPage</Link>
                     </li>
-                    <li>
-                        <Link to="/users/update">UpdateUserInformationPage</Link>
+                    <li class="nav-item">
+                        <Link class="nav-link text-dark" to="/users/update">UpdateUserInformationPage</Link>
                     </li>
-                    <h1>Hallo {params.nickname}</h1>
-                    <button onClick={Logout}>Logout</button>
                 </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <Link class="nav-link text-dark" to="/userposts">Hallo {params.nickname}</Link>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn btn-link text-dark" onClick={Logout}>Logout</button>
+                    </li>
+                    
+                </ul>
+                </div>
     }
 }
 

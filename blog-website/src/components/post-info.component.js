@@ -132,7 +132,7 @@ export default class PostInfo extends Component {
     
     render() {
         return (
-            <div>
+            <div class="container text-left">
                 <h2>{this.state.title}</h2>
                 <h3>{this.state.body}</h3>
                 <h4>Likes: {this.state.likes} Date: {this.state.date}</h4>
@@ -175,7 +175,7 @@ export default class PostInfo extends Component {
 
 function CommentInfo(params){
     if(params.model !== undefined){
-    return  <div>
+    return  <div class="row">
                 <h3>{params.model.text}</h3>
                 <h4>{params.author}</h4>
                 <h4>Likes: {params.model.likes} Date: {params.model.date}</h4>
