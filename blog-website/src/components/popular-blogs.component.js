@@ -28,7 +28,7 @@ export default class MainPage extends Component {
 
     render() {
         return (
-            <div class="container text-center">
+            <div class="container text-center ">
                 {this.state.posts.map((value) => {
                     let i = this.state.users.findIndex(u => u._id === value.authorId);
                     let author;
@@ -48,9 +48,9 @@ export default class MainPage extends Component {
 
 function PostHeader(params)
 {
-    return  <div class="row">
-                <a href={"/posts/" + params.model._id}><h1>{params.model.title}</h1></a>
-                <h2>{params.author}</h2>
+    return  <div class="bg-secondary col-sm">
+                <a class="btn btn-secondary" href={"/posts/" + params.model._id}><h1>{params.model.title}</h1></a>
+                <h2>Author: {params.author}</h2>
                 <h3>Likes: {params.model.likes}</h3>
             </div>
 }

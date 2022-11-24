@@ -65,9 +65,7 @@ function NavLabels(params){
                     <li class="nav-item">
                         <Link class="nav-link text-dark" to="/blog/create">CreateBlogPage</Link>
                     </li>
-                    <li class="nav-item">
-                        <Link class="nav-link text-dark" to="/users/update">UpdateUserInformationPage</Link>
-                    </li>
+                    
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">

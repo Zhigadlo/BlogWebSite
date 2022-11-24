@@ -134,9 +134,13 @@ export default class PostInfo extends Component {
         return (
             <div class="container text-left">
                 <h2>{this.state.title}</h2>
+                <hr/>
                 <h3>{this.state.body}</h3>
-                <h4>Likes: {this.state.likes} Date: {this.state.date}</h4>
-                <input type="checkbox" id="like" onChange={this.onLikeChange}/>
+                <h5>Likes: {this.state.likes} </h5>
+                <h5>Date: {this.state.date}</h5>
+                <input type="checkbox" id="like" class="btn-check" unchecked onChange={this.onLikeChange}/>
+                <label class="btn btn-outline-danger" for="like">Like</label><br></br>
+                <hr/>
                 <h4>Comments({this.state.commentIds.length}):</h4>
                 {this.state.commentIds.map((value) => {
                     let i = this.state.comments.findIndex(c => c._id === value)
@@ -177,9 +181,10 @@ function CommentInfo(params){
     if(params.model !== undefined){
     return  <div class="row">
                 <h3>{params.model.text}</h3>
-                <h4>{params.author}</h4>
-                <h4>Likes: {params.model.likes} Date: {params.model.date}</h4>
-                
+                <h4>Author: {params.author}</h4>
+                <h5>Likes: {params.model.likes} </h5>
+                <h5>Date: {params.model.date}</h5>
+                <hr/>
             </div>
     }
 }

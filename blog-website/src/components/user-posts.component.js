@@ -37,8 +37,8 @@ export default class UserPostsPage extends Component {
     render() {
         return (
             <div>
-                <div>This is your posts.</div>
-                <div>
+                <div class="text-center fs-1">This is your posts.</div>
+                <div class="container text-center ">
                     {this.state.posts.map((value) => {
                         if(value.authorId === this.state.authorId){
                             return <PostHeader model = {value} author={this.state.author}/>
@@ -52,8 +52,8 @@ export default class UserPostsPage extends Component {
 
 function PostHeader(params)
 {
-    return  <div>
-                <a href={"/userposts/" + params.model._id}><h1>{params.model.title}</h1></a>
+    return  <div class="bg-secondary col-sm">
+                <a class="btn btn-secondary" href={"/userposts/" + params.model._id}><h1>{params.model.title}</h1></a>
                 <h2>{params.author}</h2>
                 <h3>Likes: {params.model.likes}</h3>
             </div>
